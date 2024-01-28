@@ -31,6 +31,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=50, verbose_name='Фамилия', null=True, blank=True)
     email = models.EmailField(max_length=255, null=True, blank=True, unique=True)
     avatar = models.ImageField(upload_to='profile/images/', verbose_name='Аватар', null=True, blank=True)
+    is_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

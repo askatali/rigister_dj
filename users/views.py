@@ -47,5 +47,7 @@ class LoginView(GenericAPIView):
         password = serializer.validated_data.get("password")
         user = authenticate(email=email, password=password)
         if user:
-            return Response({"token": user.tokens()}, status=status.HTTP_200_OK)
+            if user.is_verified:
+                return Response({"token": user.tokens()}, status=status.HTTP_200_OK)
+            return Response({"message": "Аккаунт не подтвержден"}, status=status.HTTP_400_BAD_REQUEST)
         return Response({'Электронный почта или пароль не верный'}, status=status.HTTP_200_OK)

@@ -32,6 +32,7 @@ class VerifyEmailSerializer(serializers.Serializer):
         if user.confirmation_code != code:
             raise ValidationError('Код указан неверно')
         user.is_active = True
+        user.is_verified = True
         user.save()
         return attrs
 
