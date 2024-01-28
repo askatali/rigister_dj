@@ -38,3 +38,11 @@ class VerifyEmailSerializer(serializers.Serializer):
     def to_representation(self, instance):
         user = User.objects.get(email=instance.get('email'))
         return {'token': user.tokens()}
+
+
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField(min_length=6, max_length=40)
+
+    class Meta:
+        fields = ('email', 'password')
