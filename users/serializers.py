@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from rest_framework.exceptions import AuthenticationFailed, ValidationError
+from rest_framework.exceptions import ValidationError
 
 from users.models import User
 
@@ -47,3 +47,9 @@ class LoginSerializer(serializers.Serializer):
 
     class Meta:
         fields = ('email', 'password')
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'avatar')

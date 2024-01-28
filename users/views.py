@@ -1,13 +1,17 @@
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, UpdateAPIView
 from rest_framework import status
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate
 
 from users.service import send_email, generate_code
-from users.serializers import RegisterSerializer, VerifyEmailSerializer, LoginSerializer
-from users.models import User
+from users.serializers import (
+    RegisterSerializer,
+    VerifyEmailSerializer,
+    LoginSerializer,
+    UserProfileSerializer
+)
 
 
 class RegisterView(GenericAPIView):
@@ -51,3 +55,24 @@ class LoginView(GenericAPIView):
                 return Response({"token": user.tokens()}, status=status.HTTP_200_OK)
             return Response({"message": "Аккаунт не подтвержден"}, status=status.HTTP_400_BAD_REQUEST)
         return Response({'Электронный почта или пароль не верный'}, status=status.HTTP_200_OK)
+
+
+class UserProfileUpdateView(UpdateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserProfileSerializer
+    lookup_field = None
+
+    def get_object(self):
+        return self.request.user
+
+
+class UserProfileDetailView(GenericAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserProfileSerializer
+
+    def get_object(self):
+        return self.request.user
+
+    def get(self, request, *args, **kwargs):
+        serializer = self.serializer_class(self.get_object(), many=False)
+        return Response(serializer.data, status=status.HTTP_200_OK)
