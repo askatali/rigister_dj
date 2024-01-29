@@ -29,17 +29,21 @@ jobs:
       run: |
         poetry install
 
+    - name: Create .env file
+
+      run: |
+        echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" > .env
+        echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
+        echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+        echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+        echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+        echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
+        echo "EMAIL_HOST_USER=${{ secrets.EMAIL_HOST_USER }}" >> .env
+        echo "EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }}" >> .env
+
     - name: Set Environment Variables
       run: |
-        python -c "from dotenv import load_dotenv; load_dotenv()"
-        echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
-        echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
-        echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
-        echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
-        echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
-        echo "DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
-        echo "EMAIL_HOST_USER=${{ secrets.EMAIL_HOST_USER }}" >> $GITHUB_ENV
-        echo "EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }}" >> $GITHUB_ENV
+        source .env
 
     - name: Run Tests
       run: |
