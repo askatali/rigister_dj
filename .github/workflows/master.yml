@@ -41,9 +41,9 @@ jobs:
         echo "EMAIL_HOST_USER=${{ secrets.EMAIL_HOST_USER }}" >> .env
         echo "EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }}" >> .env
 
-    - name: Set Environment Variables
+    - name: Load .env File
       run: |
-        source .env
+        poetry run python -m dotenv.main load .env
 
     - name: Run Tests
       run: |
