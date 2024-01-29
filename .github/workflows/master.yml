@@ -51,7 +51,7 @@ jobs:
 #        docker-compose up -d --build
     - name: Run Tests
       run: |
-        source /home/runner/.cache/pypoetry/virtualenvs/register_user-eQmeQk-R-py3.11/bin/activate  # Activate the virtual environment
+        source . .venv/bin/activate  # Activate the virtual environment
         poetry run python manage.py makemigrations
         poetry run python manage.py migrate  # Apply migrations
         poetry run python manage.py test
