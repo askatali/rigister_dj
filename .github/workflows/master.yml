@@ -16,11 +16,23 @@ jobs:
         python-version: [3.11]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python with Poetry
+      uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: 3.11
+
+    - name: Install Poetry
+      run: |
+        pip install poetry
+        poetry install
+
+    - name: Install dependencies
+      run: |
+        cd src
+        poetry install
 
     - name: Set Environment Variables
       run: |
