@@ -47,7 +47,7 @@ jobs:
 
     - name: Run Tests
       run: |
-        ls -la activate
+        ls -la venv
         source pat-project-py3.11/bin/activate  # Activate the virtual environment
         poetry run python manage.py makemigrations
         poetry run python manage.py migrate  # Apply migrations
