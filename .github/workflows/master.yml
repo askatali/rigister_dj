@@ -31,6 +31,7 @@ jobs:
 
     - name: Set Environment Variables
       run: |
+        python -c "from dotenv import load_dotenv; load_dotenv()"
         echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
         echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
         echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
