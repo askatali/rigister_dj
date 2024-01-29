@@ -35,7 +35,7 @@ jobs:
 
     - name: Set Environment Variables
       run: |
-        echo "SECRET_KEY=${{ secrets.SECRET_KEY }}"
+        echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
         echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
         echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
         echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
