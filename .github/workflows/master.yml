@@ -47,9 +47,8 @@ jobs:
 
     - name: Run Tests
       run: |
-        ls -la  # Check the directory structure
         echo "Current Directory: $(pwd)"  # Print the current directory
-        source /home/runner/work/register_python12/register_python12/.venv/bin/activate  # Activate the virtual environment
+        source /home/runner/work/register_python12/register_python1/eQmeQk-R-py3.11/bin/activate  # Activate the virtual environment
         poetry run python manage.py makemigrations
         poetry run python manage.py migrate  # Apply migrations
         poetry run python manage.py test
