@@ -43,14 +43,10 @@ jobs:
         echo "DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
         echo "EMAIL_HOST_USER=${{ secrets.EMAIL_HOST_USER }}" >> $GITHUB_ENV
         echo "EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }}" >> $GITHUB_ENV
-        echo "DJANGO_SETTINGS_MODULE=${{ secrets.DJANGO_SETTINGS_MODULE }}" >> $GITHUB_ENV
 
     - name: Run Tests
       run: |
-          ls -la  # Check the directory structure
-          VENV_PATH=$(poetry env info -p)
-          echo "Virtual Environment Path: $VENV_PATH"
-          source "$VENV_PATH/bin/activate"  # Activate the virtual environment
+          source /home/runner/.cache/pypoetry/virtualenvs/pat-project-oDAfAw-A-py3.11/bin/activate/
           poetry run python manage.py makemigrations
           poetry run python manage.py migrate
           poetry run python manage.py test
