@@ -10,8 +10,9 @@ from users.serializers import (
     RegisterSerializer,
     VerifyEmailSerializer,
     LoginSerializer,
-    UserProfileSerializer
+    ProfileUpdateSerializer
 )
+from users.models import User
 
 
 class RegisterView(GenericAPIView):
@@ -57,18 +58,9 @@ class LoginView(GenericAPIView):
         return Response({'Электронный почта или пароль не верный'}, status=status.HTTP_200_OK)
 
 
-class UserProfileUpdateView(UpdateAPIView):
-    permission_classes = [IsAuthenticated]
-    serializer_class = UserProfileSerializer
-    lookup_field = None
-
-    def get_object(self):
-        return self.request.user
-
-
 class UserProfileDetailView(GenericAPIView):
     permission_classes = [IsAuthenticated]
-    serializer_class = UserProfileSerializer
+    serializer_class = ProfileUpdateSerializer
 
     def get_object(self):
         return self.request.user
@@ -76,3 +68,20 @@ class UserProfileDetailView(GenericAPIView):
     def get(self, request, *args, **kwargs):
         serializer = self.serializer_class(self.get_object(), many=False)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class ProfileUpdateView(UpdateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ProfileUpdateSerializer
+
+    def get_queryset(self):
+        return self.request.user
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_queryset()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+

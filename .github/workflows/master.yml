@@ -47,6 +47,5 @@ jobs:
           VENV_PATH=$(poetry env info -p)
           echo "Virtual Environment Path: $VENV_PATH"
           source "$VENV_PATH/bin/activate"  # Activate the virtual environment
-          poetry run python manage.py makemigrations
           poetry run python manage.py migrate
           poetry run python manage.py test

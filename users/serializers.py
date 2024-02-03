@@ -49,7 +49,7 @@ class LoginSerializer(serializers.Serializer):
         fields = ('email', 'password')
 
 
-class UserProfileSerializer(serializers.ModelSerializer):
+class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'avatar')
