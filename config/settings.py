@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     # apps
     'users.apps.UsersConfig',
     'product.apps.ProductConfig',
+    'fashion'
 ]
 
 AUTH_USER_MODEL = 'users.User'
