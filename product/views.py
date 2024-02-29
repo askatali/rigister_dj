@@ -3,8 +3,8 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework import status
 from rest_framework.response import Response
 
-from product.models import Frame, Image
-from product.serializers import FrameListSerializer, FrameDetailSerializer
+from .models import Frame, Image
+from .serializers import FrameListSerializer, FrameDetailSerializer
 
 
 class FrameListView(ListAPIView):

@@ -11,12 +11,11 @@ class Sweatshirt(models.Model):
     photo = models.ImageField(upload_to='sweatshirt/')
     number = models.IntegerField(blank=True, null=True)
 
-
     class Meta:
         db_table = 'sweatshirt'
 
     def __str__(self):
-        return f'{self.size}'
+        return f'{self.brand}'
 
 
 class Photo(models.Model):
@@ -27,5 +26,5 @@ class Photo(models.Model):
         db_table = 'photo'
 
     def __str__(self):
-        return f'{self.sweatshirt.size}'
+        return f'{self.sweatshirt.brand}'
 

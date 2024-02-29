@@ -1,0 +1,9 @@
+[program:config]
+command=/home/askat2/rigister_dj/venv/bin/gunicorn config.wsgi:application -c /home/askat2/rigister_dj/deploy_config/gunicorn.conf.py
+directory=/home/askat2/rigister_dj
+user=askat2
+autostart=true
+autorestart=true
+redirect_stderr=true
+stdout_logfile = /home/askat2/rigister_dj/logs/debug.log
+startsecs = 0

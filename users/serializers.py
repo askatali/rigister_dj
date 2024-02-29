@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from users.models import User
+from .models import User
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -52,4 +52,4 @@ class LoginSerializer(serializers.Serializer):
 class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'avatar')
+        fields = ('first_name', 'last_name', 'email', )

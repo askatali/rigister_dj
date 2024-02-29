@@ -1,6 +1,6 @@
 from django.urls import path
 
-from users.views import (
+from .views import (
     RegisterView,
     VerifyEmailView,
     LoginView,

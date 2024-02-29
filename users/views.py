@@ -5,14 +5,14 @@ from rest_framework import status
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate
 
-from users.service import send_email, generate_code
-from users.serializers import (
+from .service import send_email, generate_code
+from .serializers import (
     RegisterSerializer,
     VerifyEmailSerializer,
     LoginSerializer,
     ProfileUpdateSerializer
 )
-from users.models import User
+from .models import User
 
 
 class RegisterView(GenericAPIView):
@@ -71,8 +71,9 @@ class UserProfileDetailView(GenericAPIView):
 
 
 class ProfileUpdateView(UpdateAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     serializer_class = ProfileUpdateSerializer
+
 
     def get_queryset(self):
         return self.request.user

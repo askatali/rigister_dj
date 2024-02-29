@@ -11,11 +11,11 @@ class SweatshirtListSerializer(serializers.ModelSerializer):
 class PhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo
-        fields = ('id', 'photo',)
+        fields = ('id', 'photo')
 
 
 class SweatDetailSerializer(serializers.ModelSerializer):
-    photos = PhotoSerializer(many=True)
+    # photos = PhotoSerializer(many=True)
 
     class Meta:
         model = Sweatshirt
